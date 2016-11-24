@@ -10,11 +10,14 @@ def get_most_played(file_name):
     with open("game_stat.txt", mode="r", encoding="UTF-8") as game_file:
         for line in game_file:
             game_list.append(line.strip().split("\t"))
-    max = {0: game_list[0][1]}
-    for game_index in range(len(game_list)):
-        if game_list[game_index][1] > max[0]:
-            max[game_index] = game_list[game_index][1]
-    return 
+
+    max = game_list[0]
+    for game in game_list:
+        if float(game[1]) > float(max[1]):
+            max = game
+
+    return max[0]
+
 
 
 """
