@@ -65,6 +65,14 @@ How many characters long is the longest title?
 Expected name of the function: count_longest_title(file_name)
 Expected output of the function: (number)
 """
+def count_longest_title(file_name):
+
+    game_list = []
+    with open(file_name, mode="r", encoding= "UTF-8") as game_file:
+        for line in game_file:
+            game_list.append(line.strip().split("\t"))
+    
+    return max(len(game[0]) for game in game_list)
 
 """
 What is the average of the release dates?
@@ -72,6 +80,14 @@ Expected name of the function: get_date_avg(file_name)
 Expected output of the function: average year (number)
 Other expectation: the return value must be the rounded up average
 """
+def get_date_avg(file_name):
+
+    game_list = []
+    with open(file_name, mode="r", encoding= "UTF-8") as game_file:
+        for line in game_file:
+            game_list.append(line.strip().split("\t"))
+    
+    return math.ceil(sum(int(game[2]) for game in game_list) / len(game_list))
 
 """
 What properties has a game?
