@@ -2,37 +2,28 @@ import reports
 
 def main():
     
-    year = int(input("Is there a game from (enter a year): "))
+    year = int(input("Is there a game from (enter a year) or <press enter to skip>: ") or 1999)
     
     print("\n", reports.get_genres("game_stat.txt"))
-    genre = input("Number of games from (enter a genre): ")
+    genre = input("Number of games from (enter a genre) or <press enter to skip>: ") or "RPG"
 
     print("\n", reports.sort_abc("game_stat.txt"))
-    title = input("Line number of (enter a title): ")
+    title = input("Line number of (enter a title) or <press enter to skip>: ") or "Minecraft"
 
     genre_list = reports.get_genres("game_stat.txt")
     title_list = reports.sort_abc("game_stat.txt")
 
-    report_dict = {
-        "Game count: ": reports.count_games("game_stat.txt"),
-        "Is there a game from " + str(year) + ": " : reports.decide("game_stat.txt", year),
-        "Latest game: ": reports.get_latest("game_stat.txt"),
-        "Number of " + genre + " games: ": reports.count_by_genre("game_stat.txt", genre),
-        "Line number of " + title + ": ": reports.get_line_number_by_title("game_stat.txt", title),
-        "Ordered titles: ": ("" .join( game + ", " for game in title_list if game != title_list[-1])) + title_list[-1],     # Adds a comma between each game title
-        "Genres: ": ("" . join( genre + ", " for genre in genre_list if genre != genre_list[-1])) + genre_list[-1],         # Adds a comma between each genre
-        "Release date of top-sold FPS: ": reports.when_was_top_sold_fps("game_stat.txt")}
     
-    export_file = open("report-results.txt", mode="w")
+    with  open("report-results.txt", mode="w", encoding = "UTF-8") as export_file:
 
-    for key in report_dict:
-
-        export_file.write(key)
-        export_file.write(str(report_dict[key]))
-        export_file.write("\n\n")
-
-
-    export_file.close()
+        export_file.write("Game count: " + str(reports.count_games("game_stat.txt")) + "\n\n")
+        export_file.write("Is there a game from " + str(year) + ": " + str(reports.decide("game_stat.txt", year)) + "\n\n")
+        export_file.write("Latest game: " + str(reports.get_latest("game_stat.txt")) + "\n\n")
+        export_file.write("Number of " + genre + " games: " + str(reports.count_by_genre("game_stat.txt", genre)) + "\n\n")
+        export_file.write("Line number of " + title + ": " + str(reports.get_line_number_by_title("game_stat.txt", title)) + "\n\n")
+        export_file.write("Ordered titles: \n" + ("" .join( game + ", " for game in title_list if game != title_list[-1])) + title_list[-1] + "\n\n")     # Adds a comma between each game title
+        export_file.write("Genres: " + ("" . join( genre + ", " for genre in genre_list if genre != genre_list[-1])) + genre_list[-1] + "\n\n")         # Adds a comma between each genre
+        export_file.write("Release date of top-sold FPS: " + str(reports.when_was_top_sold_fps("game_stat.txt")) + "\n\n")
 
 
 if __name__ == "__main__":
