@@ -28,8 +28,6 @@ def get_latest(file_name):
     for game in game_list:
         if game[2] > latest_year:
             latest_year = game[2]
-
-    result = []
     for game in game_list:
         if game[2] == latest_year:
             return game[0]
@@ -80,7 +78,6 @@ def sort_abc(file_name):
 
 
 def get_genres(file_name):
-
     game_list = []
     with open(file_name, mode="r", encoding="UTF-8") as game_file:
         for lines in game_file:
@@ -90,7 +87,6 @@ def get_genres(file_name):
 
 
 def when_was_top_sold_fps(file_name):
-
     game_list = []
     with open(file_name, mode="r", encoding="UTF-8") as game_file:
         for lines in game_file:
@@ -100,7 +96,6 @@ def when_was_top_sold_fps(file_name):
         if game[3] == "First-person shooter":
             top_sold = game
             break
-
     for game in game_list:
         if game[3] == "First-person shooter":
             if float(game[1]) > float(top_sold[1]):
