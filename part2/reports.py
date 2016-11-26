@@ -1,4 +1,3 @@
-
 def get_most_played(file_name):
     game_list = []
     with open(file_name, mode="r", encoding="UTF-8") as game_file:
